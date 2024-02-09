@@ -10,6 +10,13 @@
      Ao contrário do ReactiveFormModule, nós fazemos as validações na própria template como vemos abaixo-->
 
       <input name="nome" id="nome" class="campo__escrita" ngModel required minlength="2">
+
+      <span class="erro__texto" *ngIf="formulario.controls['nome']?.errors?.['required']">
+        Campo de nome é obrigatório.
+      </span>
+      <span class="erro__texto" *ngIf="formulario.controls['nome']?.errors?.['minlength']">
+        Nome deve ter no mínimo 2 caracteres.
+      </span>
     </div>
     <div class="formulario__dupla">
       <div class="formulario__campo">
