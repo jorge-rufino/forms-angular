@@ -74,3 +74,9 @@
   line-height: 18px;
   color: var(--vermelho);
 }
+
+/* Deixa a caixa e o texto dos inputs "red" quando são "tocados" e estão inválidos. Negamos o "form" aqui*/
+.ng-touched.ng-invalid:not(form) {
+  border-color: red;
+  color: red;
+}
