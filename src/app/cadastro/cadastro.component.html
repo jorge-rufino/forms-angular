@@ -9,16 +9,17 @@
 <!-- O "ngModel" vincula a propriedade "value" do input a diretiva "ngForm". 
      Ao contrário do ReactiveFormModule, nós fazemos as validações na própria template como vemos abaixo-->
 
-      <input name="nome" id="nome" class="campo__escrita" ngModel required minlength="2">
+      <input name="nome" id="nome" class="campo__escrita" ngModel required minlength="2" 
+        #nomeInput="ngModel">
 
-      <div *ngIf="(formulario.controls['nome']?.invalid && formulario.controls['nome']?.touched) || 
-        formulario.controls['nome']?.dirty">
-        <span class="erro__texto" *ngIf="formulario.controls['nome']?.errors?.['required']">
-          Campo de nome é obrigatório.
-        </span>
-        <span class="erro__texto" *ngIf="formulario.controls['nome']?.errors?.['minlength']">
-          Nome deve ter no mínimo 2 caracteres.
-        </span>
+      <div *ngIf="(nomeInput?.invalid && nomeInput?.touched) || 
+        nomeInput?.dirty">       
+        <app-mensagem 
+          *ngIf="nomeInput?.errors?.['required']"
+          mensagem="Campo de nome é obrigatório."></app-mensagem>
+        <app-mensagem 
+          *ngIf="nomeInput?.errors?.['minlength']"
+          mensagem="Nome deve ter no mínimo 2 caracteres."></app-mensagem>
       </div>
 
     </div>
@@ -32,32 +33,33 @@
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="telefone">Contato</label>
         <input name="telefone" id="telefone" type="tel" placeholder="(XX) XXXXX-XXXX" class="campo__escrita" ngModel
-          required pattern="(\(?\d{2}\)?\s?)(\d{5}\-?\d{4})"/>
+          required pattern="(\(?\d{2}\)?\s?)(\d{5}\-?\d{4})" #telefoneInput="ngModel"/>
 
-        <div *ngIf="(formulario.controls['telefone']?.invalid && formulario.controls['telefone']?.touched) || 
-          formulario.controls['telefone']?.dirty">
-          <span class="erro__texto" *ngIf="formulario.controls['telefone']?.errors?.['required']">
-            Campo de telefone é obrigatório.
-          </span>
-          <span class="erro__texto" *ngIf="formulario.controls['telefone']?.errors?.['pattern']">
-            Telefone inválido. Ex: 11222223333, (11) 22222-3333, 11 22222-3333, 11 222223333
-          </span>
+        <div *ngIf="(telefoneInput?.invalid && telefoneInput?.touched) || 
+          telefoneInput?.dirty">
+          <app-mensagem 
+            *ngIf="telefoneInput?.errors?.['required']"
+            mensagem="Campo de telefone é obrigatório."></app-mensagem>
+          <app-mensagem 
+            *ngIf="telefoneInput?.errors?.['pattern']"
+            mensagem="Telefone inválido. Ex: 11222223333, (11) 22222-3333, 11 22222-3333, 11 222223333."></app-mensagem>
         </div>
       </div>
     </div>
 
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="email">E-mail</label>
-      <input name="email" id="email" type="email" class="campo__escrita" ngModel required pattern="^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$"/>
+      <input name="email" id="email" type="email" class="campo__escrita" ngModel required 
+        pattern="^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$" #emailInput="ngModel"/>
 
-      <div *ngIf="(formulario.controls['email']?.invalid && formulario.controls['email']?.touched) || 
-        formulario.controls['email']?.dirty">
-        <span class="erro__texto" *ngIf="formulario.controls['email']?.errors?.['required']">
-          Campo de email é obrigatório.
-        </span>
-        <span class="erro__texto" *ngIf="formulario.controls['email']?.errors?.['pattern']">
-          E-mail inválido. Ex: exemplo@dominio.com
-        </span>
+      <div *ngIf="(emailInput?.invalid && emailInput?.touched) || 
+        emailInput?.dirty">
+        <app-mensagem 
+          *ngIf="emailInput?.errors?.['required']"
+          mensagem="Campo de email é obrigatório."></app-mensagem>
+        <app-mensagem 
+          *ngIf="emailInput?.errors?.['pattern']"
+          mensagem="E-mail inválido. Ex: exemplo@dominio.com"></app-mensagem>
       </div>
     </div>
     <h3 class="principal__subtitulo">Endereço</h3>
