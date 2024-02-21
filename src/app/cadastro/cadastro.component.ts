@@ -15,11 +15,26 @@ export class CadastroComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  consultaCEP(evento: any) {
+  consultaCEP(evento: any, formulario: NgForm) {
     const cep = evento.target.value;
-    return this.cepService.getConsultaCep(cep).subscribe( resposta => {
-      console.log(resposta);
-    });
+
+    if(cep !== ''){
+        this.cepService.getConsultaCep(cep).subscribe( resposta => {
+          console.log(resposta);
+          this.populandoEndereco(resposta, formulario);
+      });
+    }
+  }
+
+  //Os campos do "patchValue", são referentes aos campos "name" no template html. Sem o campo/tag "name", nao funciona
+  populandoEndereco(dados: any, formulario: NgForm){
+    formulario.form.patchValue({
+      endereco: dados.logradouro,
+      complemento: dados.complemento,
+      bairro: dados.bairro,
+      cidade: dados.localidade,
+      estado: dados.uf
+    })
   }
 
   cadastrar(form: NgForm){

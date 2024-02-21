@@ -148,7 +148,7 @@
         pattern="^(\d{5})(-?\d{3})$"
         minlength="8"
         maxlength="9"
-        (blur)="consultaCEP($event)"
+        (blur)="consultaCEP($event, formulario)"
       />
 
       <div *ngIf="(cepInput?.invalid && cepInput?.touched) || cepInput?.dirty">
@@ -258,9 +258,12 @@
         </div>
       </div>
 
+    <!-- Por mais que não estejamos validando este campo, precimos adicionar o "ngModel" para que ele faça parte
+      do NgForm, se não na hora de carregar os dados da API de Cep, ele não será alterado-->
+
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="estado">UF</label>
-        <select id="estado" name="estado" class="campo__escrita">
+        <select id="estado" name="estado" class="campo__escrita" ngModel>
           <option value="AC">Acre</option>
           <option value="AL">Alagoas</option>
           <option value="AP">Amapá</option>
