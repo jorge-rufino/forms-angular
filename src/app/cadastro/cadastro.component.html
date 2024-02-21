@@ -150,12 +150,8 @@
         maxlength="9"
         (blur)="consultaCEP($event)"
       />
-      
-      <div
-        *ngIf="
-          (cepInput?.invalid && cepInput?.touched) || cepInput?.dirty
-        "
-      >
+
+      <div *ngIf="(cepInput?.invalid && cepInput?.touched) || cepInput?.dirty">
         <app-mensagem
           *ngIf="cepInput?.errors?.['required']"
           mensagem="Campo de cep é obrigatório."
@@ -170,13 +166,58 @@
     <!-- ENDEREÇO -->
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="endereco">Endereço</label>
-      <input name="endereco" id="endereco" class="campo__escrita" />
+      <input
+        name="endereco"
+        id="endereco"
+        class="campo__escrita"
+        ngModel
+        required
+        minlength="4"
+        maxlength="255"
+        #enderecoInput="ngModel"
+      />
+
+      <div
+        *ngIf="
+          (enderecoInput?.invalid && enderecoInput?.touched) ||
+          enderecoInput?.dirty
+        "
+      >
+        <app-mensagem
+          *ngIf="enderecoInput?.errors?.['required']"
+          mensagem="Campo de endereço é obrigatório."
+        ></app-mensagem>
+        <app-mensagem
+          *ngIf="enderecoInput?.errors?.['minlength']"
+          mensagem="Campo de endereço tem no mínimo 4 caracteres."
+        ></app-mensagem>
+      </div>
     </div>
 
     <div class="formulario__dupla">
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="numero">Numero</label>
-        <input name="numero" id="numero" class="campo__escrita" />
+        <input
+          name="numero"
+          id="numero"
+          class="campo__escrita"
+          ngModel
+          required
+          maxlength="10"
+          #numeroInput="ngModel"
+        />
+
+        <div
+          *ngIf="
+            (numeroInput?.invalid && numeroInput?.touched) ||
+            numeroInput?.dirty
+          "
+        >
+          <app-mensagem
+            *ngIf="numeroInput?.errors?.['required']"
+            mensagem="Campo de endereço é obrigatório."
+          ></app-mensagem>          
+        </div>
       </div>
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="complemento">Complemento</label>
@@ -185,12 +226,36 @@
     </div>
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="bairro">Bairro</label>
-      <input name="bairro" id="bairro" class="campo__escrita" />
+      <input name="bairro" id="bairro" class="campo__escrita" ngModel required #bairroInput="ngModel"/>
+
+      <div
+          *ngIf="
+            (bairroInput?.invalid && bairroInput?.touched) ||
+            bairroInput?.dirty
+          "
+        >
+          <app-mensagem
+            *ngIf="bairroInput?.errors?.['required']"
+            mensagem="Campo de bairro é obrigatório."
+          ></app-mensagem>          
+        </div>
     </div>
     <div class="formulario__dupla">
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="cidade">Cidade</label>
-        <input name="cidade" id="cidade" class="campo__escrita" />
+        <input name="cidade" id="cidade" class="campo__escrita" ngModel required #cidadeInput="ngModel"/>
+
+        <div
+          *ngIf="
+            (cidadeInput?.invalid && cidadeInput?.touched) ||
+            cidadeInput?.dirty
+          "
+        >
+          <app-mensagem
+            *ngIf="cidadeInput?.errors?.['required']"
+            mensagem="Campo de cidade é obrigatório."
+          ></app-mensagem>          
+        </div>
       </div>
 
       <div class="formulario__campo">
